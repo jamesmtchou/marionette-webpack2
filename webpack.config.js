@@ -14,7 +14,8 @@ const webpackCommon = {
     rules: [
       {
         test: /\.js?$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules|intialize.js/,
+          path.resolve(__dirname, 'app/initialize.js')],
         use: [
           {
             loader: 'babel-loader?presets[]=es2015'
@@ -47,6 +48,9 @@ const webpackCommon = {
     new CopyWebpackPlugin([{
       from: './app/assets/index.html',
       to: './index.html'
+    }, {
+      from: './app/assets/marionette-app.html',
+        to: './marionette-app.html'
     }]),
     new webpack.ProvidePlugin({
       $: 'jquery',
